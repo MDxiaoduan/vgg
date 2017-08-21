@@ -226,12 +226,12 @@ class vgg16:
                     # mean, variance = tf.nn.moments(fc1l, [0, 1, 2])
                     # conv_batch = tf.nn.batch_normalization(fc1l, mean, variance, offset, scale, 1e-10)
 
-                    fc1 = tf.nn.relu(fc1l)
+                    fc1 = tf.nn.sigmoid(fc1l)
                 with tf.variable_scope('fc2'):
                     self.weight_fc_2 = tf.get_variable('weight', [4096, 4096])
                     self.biases_fc_2 = tf.get_variable('biases', [4096])
                     fc12 = tf.nn.bias_add(tf.matmul(fc1, self.weight_fc_2), self.biases_fc_2)
-                    fc2 = tf.nn.relu(fc12)
+                    fc2 = tf.nn.sigmoid(fc12)
                 with tf.variable_scope('fc3'):
                     self.weight_fc_3 = tf.get_variable('weight', [4096, _init_.classes_numbers])
                     self.biases_fc_3 = tf.get_variable('biases', [_init_.classes_numbers])
